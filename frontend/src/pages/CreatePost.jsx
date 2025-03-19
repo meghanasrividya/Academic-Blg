@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createPost } from "../api";
+import "./CreatePost.css"; // Import the CSS for styling
 
 const CreatePost = () => {
   const [form, setForm] = useState({ title: "", content: "", category: "" });
@@ -14,23 +15,39 @@ const CreatePost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Title"
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        onChange={(e) => setForm({ ...form, category: e.target.value })}
-      />
-      <textarea
-        placeholder="Content"
-        onChange={(e) => setForm({ ...form, content: e.target.value })}
-      ></textarea>
-      <button type="submit">Create Post</button>
-    </form>
+    <div className="create-post-container">
+      <div className="create-post-card">
+        <h2>Create New Post</h2>
+        <form onSubmit={handleSubmit} className="create-post-form">
+          <input
+            type="text"
+            placeholder="Title"
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            className="create-post-input"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Category"
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            className="create-post-input"
+            required
+          />
+          <textarea
+            placeholder="Content"
+            value={form.content}
+            onChange={(e) => setForm({ ...form, content: e.target.value })}
+            className="create-post-textarea"
+            required
+          ></textarea>
+          <button type="submit" className="create-post-button">
+            Create Post
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

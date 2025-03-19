@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../api";
 import { Link } from "react-router-dom";
+import "./BlogList.css"; // Import the CSS file for styling
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -10,15 +11,19 @@ const BlogList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Blog Posts</h1>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>Category: {post.category}</p>
-          <Link to={`/post/${post.id}`}>Read More</Link>
-        </div>
-      ))}
+    <div className="blog-list-container">
+      <h1 className="blog-list-title">Latest Blog Posts</h1>
+      <div className="blog-cards-container">
+        {posts.map((post) => (
+          <div className="blog-card" key={post.id}>
+            <h3 className="blog-card-title">{post.title}</h3>
+            <p className="blog-card-category">Category: {post.category}</p>
+            <Link to={`/post/${post.id}`} className="blog-card-link">
+              Read More
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

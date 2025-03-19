@@ -1,0 +1,119 @@
+/* CreatePost.css */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  /* Container */
+  .create-post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fafafa;
+    padding: 20px;
+  }
+  
+  .create-post-card {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Card hover effect */
+  .create-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Title */
+  .create-post-card h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Form */
+  .create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .create-post-input,
+  .create-post-textarea {
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Input & Textarea focus effects */
+  .create-post-input:focus,
+  .create-post-textarea:focus {
+    border-color: #646cff;
+    background-color: #e9e9e9;
+    outline: none;
+  }
+  
+  /* Textarea */
+  .create-post-textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* Button */
+  .create-post-button {
+    padding: 15px;
+    font-size: 1.2em;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .create-post-button:hover {
+    background-color: #535bf2;
+    transform: scale(1.05);
+  }
+  
+  /* Button focus effect */
+  .create-post-button:focus {
+    outline: 4px solid rgba(100, 108, 255, 0.4);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .create-post-card {
+      padding: 20px;
+    }
+  
+    .create-post-card h2 {
+      font-size: 2em;
+    }
+  
+    .create-post-input,
+    .create-post-textarea {
+      padding: 10px;
+    }
+  }
+  

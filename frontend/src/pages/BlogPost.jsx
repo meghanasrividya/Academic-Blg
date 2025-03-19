@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPost } from "../api";
+import "./BlogPost.css"; // Import the CSS for styling
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -11,13 +12,17 @@ const BlogPost = () => {
   }, [id]);
 
   return post ? (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <p>Category: {post.category}</p>
+    <div className="blogpost-container">
+      <div className="blogpost-card">
+        <h1 className="blogpost-title">{post.title}</h1>
+        <p className="blogpost-content">{post.content}</p>
+        <p className="blogpost-category">Category: <span>{post.category}</span></p>
+      </div>
     </div>
   ) : (
-    <p>Loading...</p>
+    <div className="loading-container">
+      <p>Loading...</p>
+    </div>
   );
 };
 
