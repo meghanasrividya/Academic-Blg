@@ -1,14 +1,39 @@
-module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define("Post", {
-    title: DataTypes.STRING,
-    content: DataTypes.TEXT,
-    category: DataTypes.STRING,
-    userId: DataTypes.INTEGER
-  });
+const { Model, DataTypes } = require("sequelize");
 
-  Post.associate = (models) => {
-    Post.belongsTo(models.User, { foreignKey: "userId" });
-  };
+const sequelize = require("../config/connection");
 
-  return Post;
-};
+class Post extends Model {}
+
+Course.init(
+  {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    created_by: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "category",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "post",
+  }
+);
+
+// Export Course model
+module.exports = Post;

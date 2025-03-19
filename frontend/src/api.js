@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "http://localhost:5000" }); // Ensure /api is included
 
 // Auth
 export const register = (data) => API.post("/auth/register", data);
@@ -10,6 +10,7 @@ export const getProfile = (token) => API.get("/auth/profile", { headers: { Autho
 // Blog Posts
 export const getPosts = () => API.get("/posts");
 export const getPost = (id) => API.get(`/posts/${id}`);
-export const createPost = (data, token) => API.post("/posts", data, { headers: { Authorization: token } });
+export const createPost = (data, token) =>
+  API.post("/posts", data, { headers: { Authorization: `Bearer ${token}` } });
 
 export default API;
