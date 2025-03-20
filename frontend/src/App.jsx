@@ -1,24 +1,27 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BlogList from "./pages/BlogList";
-import BlogPost from "./pages/BlogPost";
-import CreatePost from "./pages/CreatePost";
-import Login from "./pages/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
+import BlogList from "./pages/BlogList";
+import SingleBlog from "./pages/SingleBlog";
+import CreateBlog from "./pages/CreateBlog";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<BlogList />} />
-        <Route path="/post/:id" element={<BlogPost />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/posts" element={<BlogList />} />
+        <Route path="/post/:id" element={<SingleBlog />} />
+        <Route path="/create-blog" element={<CreateBlog />} />
       </Routes>
-    </BrowserRouter>
+      <Footer />
+    </Router>
   );
 };
 
