@@ -1,39 +1,46 @@
-import React, { useState } from "react";
-import { login } from "../api";
-import "./Login.css"; // Import the CSS file for styling
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await login(form);
-      localStorage.setItem("token", data.token);
-      alert("Login successful!");
+      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+      alert(response.data.message);
+      localStorage.setItem("token", response.data.token);
+      navigate("/posts");
     } catch (error) {
-      alert("Login failed! Please try again.");
+      alert(error.response.data.error);
     }
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2 className="login-title">Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          className="login-input"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="login-input"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button type="submit" className="login-btn">Login</button>
-      </form>
+    <div className="login">
+      <div className="card">
+        <h2 className="title">Login</h2>
+        <form onSubmit={handleSubmit} className="form">
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="input"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            className="input"
+          />
+          <button type="submit" className="button">Login</button>
+        </form>
+      </div>
     </div>
   );
 };

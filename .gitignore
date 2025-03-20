@@ -11,3 +11,4 @@ backend/logs
 frontend/logs
 frontend/dist
 uploads/
+node_modules
