@@ -1,44 +1,52 @@
-import React, { useState } from "react";
-import { register } from "../api";
-import "./Register.css"; // Import the CSS file for styling
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "../styles/Register.css";
 
 const Register = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(form);
-      alert("Registration successful!");
+      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      alert(response.data.message);
+      navigate("/login");
     } catch (error) {
-      alert("Registration failed! Please try again.");
+      alert(error.response.data.error);
     }
   };
 
   return (
-    <div className="register-container">
-      <form onSubmit={handleSubmit} className="register-form">
-        <h2 className="register-title">Create an Account</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          className="register-input"
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          className="register-input"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="register-input"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button type="submit" className="register-btn">Register</button>
-      </form>
+    <div className="register">
+      <div className="card">
+        <h2 className="title">Register</h2>
+        <form onSubmit={handleSubmit} className="form">
+          <input
+            type="text"
+            placeholder="Username"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+            className="input"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="input"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            className="input"
+          />
+          <button type="submit" className="button">Register</button>
+        </form>
+      </div>
     </div>
   );
 };
