@@ -1,92 +1,92 @@
-const { Post, User, Category } = require("../models");
+const { Post, User, Category } = require('../models');
 
-// Create a new post
-const createPost = async (req, res) => {
-  const { title, content, categoryId } = req.body;
-  const userId = req.user.id; // Extracted from JWT
-
-  try {
-    const post = await Post.create({ title, content, userId, categoryId });
-    res.status(201).json({ message: "Post created successfully", post });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Get all posts
-const getAllPosts = async (req, res) => {
+exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
       include: [
-        { model: User, as: "user" },
-        { model: Category, as: "category" },
+        { model: User, attributes: ['username', 'firstName', 'lastName'] },
+        { model: Category, attributes: ['name', 'slug'] },
       ],
     });
-    res.status(200).json(posts);
+    res.json(posts);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: 'Error fetching posts', error });
   }
 };
 
-// Get a single post by ID
-const getPostById = async (req, res) => {
-  const { id } = req.params;
-
+exports.getPostBySlug = async (req, res) => {
   try {
-    const post = await Post.findByPk(id, {
+    const post = await Post.findOne({
+      where: { slug: req.params.slug },
       include: [
-        { model: User, as: "user" },
-        { model: Category, as: "category" },
+        { model: User, attributes: ['username', 'firstName', 'lastName'] },
+        { model: Category, attributes: ['name', 'slug'] },
       ],
     });
+
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      return res.status(404).json({ message: 'Post not found' });
     }
-    res.status(200).json(post);
+
+    res.json(post);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: 'Error fetching post', error });
   }
 };
 
-// Update a post
-const updatePost = async (req, res) => {
-  const { id } = req.params;
-  const { title, content, categoryId } = req.body;
-  const userId = req.user.id; // Extracted from JWT
-
+exports.createPost = async (req, res) => {
   try {
-    const post = await Post.findOne({ where: { id, userId } });
-    if (!post) {
-      return res.status(404).json({ error: "Post not found or unauthorized" });
-    }
+    const { title, content, categoryId } = req.body;
+    const slug = title.toLowerCase().replace(/ /g, '-');
 
-    post.title = title;
-    post.content = content;
-    post.categoryId = categoryId;
-    await post.save();
+    const post = await Post.create({
+      title,
+      content,
+      slug,
+      userId: req.user.id,
+      categoryId,
+    });
 
-    res.status(200).json({ message: "Post updated successfully", post });
+    res.status(201).json({ message: 'Post created', post });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: 'Error creating post', error });
   }
 };
 
-// Delete a post
-const deletePost = async (req, res) => {
-  const { id } = req.params;
-  const userId = req.user.id; // Extracted from JWT
-
+exports.updatePost = async (req, res) => {
   try {
-    const post = await Post.findOne({ where: { id, userId } });
+    const post = await Post.findByPk(req.params.id);
+
     if (!post) {
-      return res.status(404).json({ error: "Post not found or unauthorized" });
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    if (post.userId !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to update this post' });
+    }
+
+    await post.update(req.body);
+    res.json({ message: 'Post updated', post });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating post', error });
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  try {
+    const post = await Post.findByPk(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    if (post.userId !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to delete this post' });
     }
 
     await post.destroy();
-    res.status(200).json({ message: "Post deleted successfully" });
+    res.json({ message: 'Post deleted' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: 'Error deleting post', error });
   }
 };
-
-module.exports = { createPost, getAllPosts, getPostById, updatePost, deletePost };

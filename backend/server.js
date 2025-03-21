@@ -1,29 +1,36 @@
-const express = require("express");
-const sequelize = require("./config/database"); // Correct import
-const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");
-const postRoutes = require("./routes/postRoutes");
-const categoryRoutes = require("./routes/categoryRoutes");
+const express = require('express');
+const cors = require('cors');
+const sequelize = require('./config/database');
+const routes = require('./routes');
 
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(cors());
-
-// Test database connection
-sequelize
-  .authenticate()
-  .then(() => console.log("Database connected"))
-  .catch(err => console.error("Unable to connect to the database:", err));
-
-// Sync database
-sequelize
-  .sync()
-  .then(() => console.log("Database synced"))
-  .catch(err => console.error("Unable to sync database:", err));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/categories", categoryRoutes);
+app.use(routes);
 
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Server error' });
+});
+
+// Database sync and server start
+async function startServer() {
+  try {
+    await sequelize.sync();
+    console.log('Database synchronized');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+  }
+}
+
+startServer();
