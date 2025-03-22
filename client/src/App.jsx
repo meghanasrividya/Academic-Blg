@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
+import ProtectedRoute from './components/ProtectedRoute'; // ✅ Import this
 
 export default function App() {
   return (
@@ -15,8 +16,24 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/edit/:id" element={<EditPost />} />
+          
+          {/* ✅ Protected routes below */}
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoute>
+                <CreatePost />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditPost />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </>
