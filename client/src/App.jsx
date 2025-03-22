@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import ProtectedRoute from './components/ProtectedRoute'; // ✅ Import this
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -34,6 +35,14 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+  path="/profile"
+  element={
+    <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
         </Routes>
       </div>
     </>
