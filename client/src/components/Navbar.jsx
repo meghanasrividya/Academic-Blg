@@ -1,8 +1,10 @@
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 import './Navbar.css';
 
 export default function Navbar({ onSearch }) {
+  const { darkMode, toggleTheme } = useContext(ThemeContext);
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -11,6 +13,12 @@ export default function Navbar({ onSearch }) {
     e.preventDefault();
     onSearch(query);
     navigate('/');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -30,15 +38,15 @@ export default function Navbar({ onSearch }) {
       </form>
 
       <div className="navbar-right">
+        <button onClick={toggleTheme} title="Toggle theme">
+          {darkMode ? '☀️ Light' : '🌙 Dark'}
+        </button>
+
         {token ? (
           <>
             <Link to="/create">✍️ New</Link>
             <Link to="/profile">👤 Profile</Link>
-            <button onClick={() => {
-              localStorage.removeItem('token');
-              navigate('/');
-              window.location.reload();
-            }}>🚪 Logout</button>
+            <button onClick={handleLogout}>🚪 Logout</button>
           </>
         ) : (
           <>
