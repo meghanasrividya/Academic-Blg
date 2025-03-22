@@ -1,53 +1,43 @@
-// Home.jsx - List + Delete Posts (Production Ready)
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Pages.css';
 
-export default function Home() {
+export default function Home({ searchQuery }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('/api/posts')
       .then(res => setPosts(res.data))
-      .catch(() => alert('❌ Failed to load posts.'))
+      .catch(err => console.error('Failed to fetch posts:', err))
       .finally(() => setLoading(false));
   }, []);
 
-  const handleDelete = async (id) => {
-    const confirm = window.confirm('Are you sure you want to delete this post?');
-    if (!confirm) return;
-
-    try {
-      await axios.delete(`/api/posts/${id}`);
-      setPosts(prev => prev.filter(p => p.id !== id));
-    } catch (err) {
-      alert('Failed to delete post.');
-      console.error(err);
-    }
-  };
+  const filteredPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="page">
-      <div className="header">
-        <h2>📚 Academic Blog</h2>
-        <Link to="/create" className="create-btn">+ New Post</Link>
-      </div>
-      {loading ? <p>Loading...</p> : posts.length === 0 ? (
-        <p>No posts yet. Start writing something!</p>
+      <h2>Latest Posts</h2>
+
+      {loading ? (
+        <p>Loading posts...</p>
+      ) : filteredPosts.length === 0 ? (
+        <p>❌ No posts found.</p>
       ) : (
-        posts.map(post => (
-          <div key={post.id} className="post-card">
+        filteredPosts.map(post => (
+          <div className="post-card" key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.content.substring(0, 120)}...</p>
-            <small>
-              By <strong>{post.User?.username || 'Anonymous'}</strong> 
-              on {new Date(post.createdAt).toLocaleDateString()}
-            </small>
             <div className="actions">
-              <Link to={`/edit/${post.id}`} className="edit-btn">✏️ Edit</Link>
-              <button onClick={() => handleDelete(post.id)} className="delete-btn">🗑️ Delete</button>
+              <Link to={`/edit/${post.id}`} className="edit-btn">Edit</Link>
+              <button onClick={() => {
+                axios.delete(`/api/posts/${post.id}`);
+                setPosts(prev => prev.filter(p => p.id !== post.id));
+              }} className="delete-btn">Delete</button>
             </div>
           </div>
         ))

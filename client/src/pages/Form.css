@@ -1,39 +1,49 @@
+/* Form.css - shared styling for CreatePost & EditPost */
+
 .form-page {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 0 20px;
-  }
-  
-  .post-form {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .post-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .post-form input,
-  .post-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
-  }
-  
-  .post-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #10b981;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.post-form h2 {
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.post-form input,
+.post-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.post-form input:focus,
+.post-form textarea:focus {
+  border-color: #007bff;
+}
+
+.post-form button {
+  background: #28a745;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.post-form button:hover {
+  background: #218838;
+}
