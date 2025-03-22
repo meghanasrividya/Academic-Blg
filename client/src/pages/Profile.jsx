@@ -1,42 +1,58 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import './Profile.css';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios
-      .get('/api/users/me', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setUser(res.data))
-      .catch((err) => console.error('Profile fetch error:', err));
+    if (!token) return;
+
+    axios.get("/api/users/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(res => setUser(res.data))
+    .catch(err => {
+      console.error("Profile fetch error:", err);
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+    });
   }, [token]);
 
-  if (!user) return <p className="loading">Loading profile...</p>;
+  const handleUpload = async (e) => {
+    const formData = new FormData();
+    formData.append('avatar', e.target.files[0]);
+
+    try {
+      await axios.post('/api/users/avatar', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        }
+      });
+      window.location.reload(); // Refresh to show updated avatar
+    } catch (err) {
+      console.error("Avatar upload failed:", err);
+    }
+  };
+
+  if (!user) return <p>Loading profile...</p>;
 
   return (
     <div className="profile-page">
+      <h2>👤 My Profile</h2>
       <div className="profile-card">
-        <div className="avatar">{user.username.charAt(0)}</div>
-        <h2>{user.username}</h2>
+        <img
+          src={user.avatar || '/default-avatar.png'}
+          alt="avatar"
+          className="avatar-img"
+        />
+        <input type="file" onChange={handleUpload} />
+        <h3>{user.username}</h3>
         <p>{user.email}</p>
-        <hr />
-        <h3>📝 Your Posts</h3>
-        <ul className="profile-posts">
-          {user.Posts?.length === 0 ? (
-            <p>No posts yet.</p>
-          ) : (
-            user.Posts.map((post) => (
-              <li key={post.id}>
-                <strong>{post.title}</strong>
-                <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-              </li>
-            ))
-          )}
-        </ul>
       </div>
     </div>
   );
