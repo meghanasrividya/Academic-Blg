@@ -52,6 +52,24 @@ export default function Profile() {
     }
   };
 
+  const handleRemoveAvatar = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to remove your avatar?");
+    if (!confirmDelete) return;
+  
+
+    try {
+      await axios.delete('/api/users/avatar', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      setAvatar(null); // Update state to remove avatar
+    } catch (err) {
+      console.error("Remove error:", err);
+    }
+  };
+  
+
   if (!user) return <p>Loading profile...</p>;
 
   return (
@@ -63,7 +81,11 @@ export default function Profile() {
           alt="avatar"
           className="avatar-img"
         />
+        <button onClick={handleRemoveAvatar} className="remove-btn" title="Remove Avatar">
+        🗑️
+</button>
         <input type="file" onChange={handleUpload} />
+        
         <h3>{user.username}</h3>
         <p>{user.email}</p>
       </div>

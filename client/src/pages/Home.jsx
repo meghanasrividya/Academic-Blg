@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Pages.css';
 
-export default function Home({ searchQuery }) {
+export default function Home({ searchQuery = '' }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/api/posts')
@@ -14,6 +15,19 @@ export default function Home({ searchQuery }) {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Are you sure you want to delete this post?");
+    if (!confirm) return;
+
+    try {
+      await axios.delete(`/api/posts/${id}`);
+      setPosts(prev => prev.filter(p => p.id !== id));
+    } catch (err) {
+      console.error("Failed to delete:", err);
+      alert("Error deleting post.");
+    }
+  };
+
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.content.toLowerCase().includes(searchQuery.toLowerCase())
@@ -21,7 +35,7 @@ export default function Home({ searchQuery }) {
 
   return (
     <div className="page">
-      <h2>Latest Posts</h2>
+      <h2>📝 Latest Posts</h2>
 
       {loading ? (
         <p>Loading posts...</p>
@@ -30,14 +44,13 @@ export default function Home({ searchQuery }) {
       ) : (
         filteredPosts.map(post => (
           <div className="post-card" key={post.id}>
-            <h3>{post.title}</h3>
+            <Link to={`/posts/${post.id}`} className="post-title">
+              <h3>{post.title}</h3>
+            </Link>
             <p>{post.content.substring(0, 120)}...</p>
             <div className="actions">
-              <Link to={`/edit/${post.id}`} className="edit-btn">Edit</Link>
-              <button onClick={() => {
-                axios.delete(`/api/posts/${post.id}`);
-                setPosts(prev => prev.filter(p => p.id !== post.id));
-              }} className="delete-btn">Delete</button>
+              <Link to={`/edit/${post.id}`} className="edit-btn">✏️ Edit</Link>
+              <button onClick={() => handleDelete(post.id)} className="delete-btn">🗑️ Delete</button>
             </div>
           </div>
         ))

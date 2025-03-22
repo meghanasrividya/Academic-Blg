@@ -9,6 +9,7 @@ import postRoutes from './routes/postRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import commentRoutes from './routes/commentRoutes.js';
 
 // Get __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(xssClean());
+app.use('/api/comments', commentRoutes);
 
 // Routes
 app.use('/api/auth', authRoutes);
