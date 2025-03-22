@@ -1,7 +1,7 @@
 // EditPost.jsx - Update Post (Professional UI)
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import api from '../api';
 import './Form.css';
 
 export default function EditPost() {
@@ -12,7 +12,7 @@ export default function EditPost() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/posts/${id}`).then(res => {
+    api.get(`/posts/${id}`).then(res => {
       setPost(res.data);
       setTitle(res.data.title);
       setContent(res.data.content);
@@ -24,7 +24,7 @@ export default function EditPost() {
   const handleUpdate = async e => {
     e.preventDefault();
     try {
-      await axios.put(`/api/posts/${id}`, { title, content });
+      await api.put(`/posts/${id}`, { title, content });
       navigate('/');
     } catch (err) {
       console.error(err);
