@@ -31,13 +31,19 @@ router.get('/me', authenticate, async (req, res) => {
 
 // Upload avatar
 router.post('/avatar', authenticate, upload.single('avatar'), async (req, res) => {
-  try {
-    const filePath = `/uploads/${req.file.filename}`;
-    await User.update({ avatar: filePath }, { where: { id: req.user.userId } });
-    res.json({ message: 'Avatar uploaded', path: filePath });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to upload avatar', details: err.message });
-  }
-});
+    try {
+      const avatarFile = req.file.filename;
+      const userId = req.user.userId;
+  
+      await User.update(
+        { avatar: avatarFile },
+        { where: { id: userId } }
+      );
+  
+      res.json({ message: 'Avatar uploaded successfully', avatar: avatarFile });
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to upload avatar', details: err.message });
+    }
+  });
 
 export default router;

@@ -4,6 +4,7 @@ import './Profile.css';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -12,30 +13,42 @@ export default function Profile() {
     axios.get("/api/users/me", {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then(res => setUser(res.data))
-    .catch(err => {
-      console.error("Profile fetch error:", err);
-      if (err.response?.status === 401) {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
-    });
+    .then(res => {
+      setUser(res.data);
+      setAvatar(res.data.avatar);
+    })
+    .catch(err => console.error("Profile fetch error:", err));
   }, [token]);
 
   const handleUpload = async (e) => {
+    const file = e.target.files[0];
+  
+    // ✅ File type and size validation
+    if (!file.type.startsWith('image/')) {
+      alert('Only image files are allowed.');
+      return;
+    }
+  
+    if (file.size > 1024 * 1024) { // 1MB limit
+      alert('Image size must be less than 1MB.');
+      return;
+    }
+  
     const formData = new FormData();
-    formData.append('avatar', e.target.files[0]);
-
+    formData.append('avatar', file);
+  
     try {
-      await axios.post('/api/users/avatar', formData, {
+      const res = await axios.post('/api/users/avatar', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         }
       });
-      window.location.reload(); // Refresh to show updated avatar
+  
+      setAvatar(res.data.avatar); // ✅ update avatar preview
     } catch (err) {
-      console.error("Avatar upload failed:", err);
+      console.error("Upload error:", err);
+      alert('Failed to upload avatar.');
     }
   };
 
@@ -43,10 +56,10 @@ export default function Profile() {
 
   return (
     <div className="profile-page">
-      <h2>👤 My Profile</h2>
+      <h2>My Profile</h2>
       <div className="profile-card">
         <img
-          src={user.avatar || '/default-avatar.png'}
+          src={avatar ? `/uploads/${avatar}` : '/default-avatar.png'}
           alt="avatar"
           className="avatar-img"
         />
