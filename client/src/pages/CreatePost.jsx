@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Form.css';
 
 export default function CreatePost() {
   const [title, setTitle] = useState('');
@@ -10,16 +9,33 @@ export default function CreatePost() {
 
   const handleCreate = async e => {
     e.preventDefault();
-    await axios.post('/api/posts', { title, content });
-    navigate('/');
+    try {
+      await axios.post('/api/posts', { title, content });
+      navigate('/');
+    } catch (err) {
+      console.error('Post creation failed:', err);
+      alert('Failed to publish post.');
+    }
   };
 
   return (
     <div className="form-page">
       <form onSubmit={handleCreate} className="post-form">
         <h2>Create Post</h2>
-        <input type="text" placeholder="Title" onChange={e => setTitle(e.target.value)} required />
-        <textarea placeholder="Content" rows="8" onChange={e => setContent(e.target.value)} required></textarea>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Content"
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          rows="8"
+          required
+        />
         <button type="submit">Publish</button>
       </form>
     </div>

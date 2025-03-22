@@ -1,34 +1,56 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// EditPost.jsx - Update Post (Professional UI)
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './Form.css';
 
 export default function EditPost() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [post, setPost] = useState(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   useEffect(() => {
     axios.get(`/api/posts/${id}`).then(res => {
+      setPost(res.data);
       setTitle(res.data.title);
       setContent(res.data.content);
+    }).catch(() => {
+      alert('Failed to load post');
     });
   }, [id]);
 
   const handleUpdate = async e => {
     e.preventDefault();
-    await axios.put(`/api/posts/${id}`, { title, content });
-    navigate('/');
+    try {
+      await axios.put(`/api/posts/${id}`, { title, content });
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update post');
+    }
   };
+
+  if (!post) return <p>Loading post...</p>;
 
   return (
     <div className="form-page">
       <form onSubmit={handleUpdate} className="post-form">
-        <h2>Edit Post</h2>
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)} required />
-        <textarea value={content} rows="8" onChange={e => setContent(e.target.value)} required></textarea>
-        <button type="submit">Update</button>
+        <h2>✏️ Edit Post</h2>
+        <input
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          rows="10"
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          required
+        />
+        <button type="submit">✅ Update</button>
       </form>
     </div>
   );
