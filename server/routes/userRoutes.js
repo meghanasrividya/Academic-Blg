@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import { User, Post } from '../models/index.js';
 import { authenticate } from '../middleware/authMiddleware.js';
+import fs from 'fs';
 
 const router = express.Router();
 
@@ -43,6 +44,26 @@ router.post('/avatar', authenticate, upload.single('avatar'), async (req, res) =
       res.json({ message: 'Avatar uploaded successfully', avatar: avatarFile });
     } catch (err) {
       res.status(500).json({ error: 'Failed to upload avatar', details: err.message });
+    }
+  });
+
+  router.delete('/avatar', authenticate, async (req, res) => {
+    try {
+      const user = await User.findByPk(req.user.userId);
+  
+      if (user.avatar) {
+        const filePath = path.join('uploads', user.avatar);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath); // delete the file
+        }
+  
+        user.avatar = null;
+        await user.save();
+      }
+  
+      res.json({ message: 'Avatar removed' });
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to remove avatar', details: err.message });
     }
   });
 
