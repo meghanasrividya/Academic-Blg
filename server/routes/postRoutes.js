@@ -1,6 +1,7 @@
 // server/routes/postRoutes.js
 import express from 'express';
 import { Post, User } from '../models/index.js';
+import { Comment } from '../models/index.js'; // Add this at the top
 
 const router = express.Router();
 
@@ -34,14 +35,20 @@ router.get('/', async (req, res) => {
 // READ ONE
 router.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(req.params.id, {
+      include: [
+        { model: Comment, include: [User] },
+        { model: User, attributes: ['username'] }
+      ]
+    });
+
     if (!post) return res.status(404).json({ error: 'Post not found' });
+
     res.json(post);
   } catch (err) {
     console.error('Get Post Error:', err);
-    res.status(500).json({ error: 'Error fetching post' });
-  }
-});
+    res.status(500).json({ error: 'Error fetching post', details: err.message });
+  }});
 
 // UPDATE
 router.put('/:id', async (req, res) => {

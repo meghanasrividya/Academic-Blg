@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import Profile from './pages/Profile';
-
+import PostDetail from './pages/PostDetail';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
@@ -48,6 +48,8 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/posts/:id" element={<PostDetail />} />
+
         </Routes>
       </div>
     </>
