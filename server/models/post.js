@@ -12,7 +12,10 @@ Post.init({
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  // ❌ REMOVE userId here — handled by association
+  likes: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 }, {
   sequelize,
   modelName: 'Post',

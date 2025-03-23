@@ -27,7 +27,17 @@ export default function Home({ searchQuery = '' }) {
       alert("Error deleting post.");
     }
   };
-
+  const handleLike = async (postId) => {
+    try {
+      const res = await axios.post(`/api/posts/${postId}/like`);
+      setPosts((prev) =>
+        prev.map((p) => (p.id === postId ? { ...p, likes: res.data.likes } : p))
+      );
+    } catch (err) {
+      console.error('Like error:', err);
+    }
+  };
+  
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.content.toLowerCase().includes(searchQuery.toLowerCase())
@@ -51,6 +61,8 @@ export default function Home({ searchQuery = '' }) {
             <div className="actions">
               <Link to={`/edit/${post.id}`} className="edit-btn">✏️ Edit</Link>
               <button onClick={() => handleDelete(post.id)} className="delete-btn">🗑️ Delete</button>
+              <button onClick={() => handleLike(post.id)}>❤️ {post.likes}</button>
+
             </div>
           </div>
         ))
