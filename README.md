@@ -35,4 +35,34 @@ A full-stack, feature-rich **Academic Blog** built with **React**, **Node.js**, 
 - 🖼️ Academic-Themed Background Image
 - 💅 Clean & Responsive UI
 
+## 🔐 Authentication
+
+- ✅ **JWT-based** login and registration
+- ✅ Tokens securely stored in `localStorage`
+- ✅ Protected routes using backend **middleware**
+- ✅ Auth header format:
+
+## 💡 Future Enhancements
+
+- ✍️ Rich-Text Editor (e.g., **TipTap** / **Quill**)
+- 📁 Tags & Categories for Posts
+- 🧑‍⚖️ Admin Dashboard for Moderation
+- 🔔 Email Notifications
+- 🌐 Multi-language Support
+- 📊 Post Analytics & Insights
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** © 2025 [Your Name]
+
+---
+
+## 🙌 Acknowledgements
+
+- 💻 Bootcamp mentors & instructors
+- 🧠 Sequelize, React, TailwindCSS open-source communities
+- 📸 [Unsplash](https://unsplash.com/) for free academic-themed background images
+
 ---
