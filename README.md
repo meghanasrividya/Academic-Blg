@@ -55,7 +55,7 @@ A full-stack, feature-rich **Academic Blog** built with **React**, **Node.js**, 
 
 ## 📜 License
 
-This project is licensed under the **MIT License** © 2025 [Your Name]
+This project is licensed under the **MIT License** © 2025 Meghana Aenugu
 
 ---
 
