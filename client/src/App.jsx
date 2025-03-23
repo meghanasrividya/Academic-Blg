@@ -10,6 +10,7 @@ import EditPost from './pages/EditPost';
 import Profile from './pages/Profile';
 import PostDetail from './pages/PostDetail';
 import ProtectedRoute from './components/ProtectedRoute';
+import Footer from './components/Footer';
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,6 +53,7 @@ export default function App() {
 
         </Routes>
       </div>
+      <Footer/>
     </>
   );
 }
