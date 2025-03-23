@@ -7,7 +7,8 @@ Comment.init({
   content: {
     type: DataTypes.TEXT,
     allowNull: false,
-  }
+  },
+  // ❌ REMOVE postId and userId — Sequelize adds them automatically
 }, {
   sequelize,
   modelName: 'Comment',
