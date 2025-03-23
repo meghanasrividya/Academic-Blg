@@ -88,4 +88,23 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+// Like a post
+
+// Like a post
+router.post('/:id/like', async (req, res) => {
+  try {
+    const post = await Post.findByPk(req.params.id);
+    if (!post) return res.status(404).json({ error: 'Post not found' });
+
+    post.likes += 1;
+    await post.save();
+    res.json({ message: 'Liked!', likes: post.likes });
+  } catch (err) {
+    console.error('Like error:', err);
+    res.status(500).json({ error: 'Failed to like post' });
+  }
+});
+
+
 export default router;

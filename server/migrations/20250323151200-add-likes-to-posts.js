@@ -1,15 +1,11 @@
 export default {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('Likes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      content: {
-        type: Sequelize.TEXT,
-        allowNull: false,
       },
       postId: {
         type: Sequelize.INTEGER,
@@ -26,8 +22,8 @@ export default {
           model: 'Users',
           key: 'id',
         },
-        onDelete: 'SET NULL',
-        allowNull: true,
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
@@ -35,6 +31,6 @@ export default {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable('Likes');
   },
 };
