@@ -36,9 +36,14 @@ app.use('/api/users', userRoutes);
 app.use('/api/comments', commentRoutes);
 
 // ✅ Start the server
-sequelize.sync({ alter: true }).then(() => {
-  console.log('✅ Database synced');
-  app.listen(5000, () => console.log('🚀 Server running on http://localhost:5000'));
-}).catch(err => {
-  console.error('❌ Database connection failed:', err);
-});
+sequelize
+  .sync({ alter: true })
+  .then(() => {
+    console.log('✅ Database synced');
+    app.listen(5001, () =>
+      console.log('🚀 Server running on http://localhost:5001')
+    );
+  })
+  .catch((err) => {
+    console.error('❌ Database connection failed:', err);
+  });
