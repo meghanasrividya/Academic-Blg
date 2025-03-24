@@ -62,7 +62,7 @@ This project is licensed under the **MIT License** © 2025 Meghana Aenugu
 ## 🙌 Acknowledgements
 
 - 💻 Bootcamp mentors & instructors
-- 🧠 Sequelize, React, TailwindCSS open-source communities
+- 🧠 Sequelize, React open-source communities
 - 📸 [Unsplash](https://unsplash.com/) for free academic-themed background images
 
 ---
