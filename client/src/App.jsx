@@ -17,43 +17,44 @@ export default function App() {
 
   return (
     <>
-      <Navbar onSearch={setSearchQuery} />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home searchQuery={searchQuery} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      <div className='page-wrapper'>
+        <Navbar onSearch={setSearchQuery} />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home searchQuery={searchQuery} />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/create"
-            element={
-              <ProtectedRoute>
-                <CreatePost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/edit/:id"
-            element={
-              <ProtectedRoute>
-                <EditPost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/posts/:id" element={<PostDetail />} />
-
-        </Routes>
+            {/* Protected Routes */}
+            <Route
+              path='/create'
+              element={
+                <ProtectedRoute>
+                  <CreatePost />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/edit/:id'
+              element={
+                <ProtectedRoute>
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/posts/:id' element={<PostDetail />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer/>
     </>
   );
 }
