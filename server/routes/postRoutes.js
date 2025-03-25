@@ -43,6 +43,7 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!post) return res.status(404).json({ error: 'Post not found' });
+    await post.increment('views');
 
     res.json(post);
   } catch (err) {

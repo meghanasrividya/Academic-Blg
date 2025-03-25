@@ -16,6 +16,11 @@ Post.init({
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+  views: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  }
+  
 }, {
   sequelize,
   modelName: 'Post',

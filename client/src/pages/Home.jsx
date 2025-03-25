@@ -62,6 +62,8 @@ export default function Home({ searchQuery = '' }) {
               <Link to={`/edit/${post.id}`} className="edit-btn">✏️ Edit</Link>
               <button onClick={() => handleDelete(post.id)} className="delete-btn">🗑️ Delete</button>
               <button onClick={() => handleLike(post.id)}>❤️ {post.likes}</button>
+              <small>{post.views} views</small>
+
 
             </div>
           </div>

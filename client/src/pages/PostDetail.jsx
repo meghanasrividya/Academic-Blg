@@ -62,6 +62,7 @@ export default function PostDetail() {
       <h2>{post.title}</h2>
       <p className="post-author">By User {post.userId} | {new Date(post.createdAt).toLocaleDateString()}</p>
       <div className="post-content">{post.content}</div>
+      <p className="views-count">👁️ {post.views} views</p>
 
       <div className="comments-section">
         <h3>📝 Comments</h3>
