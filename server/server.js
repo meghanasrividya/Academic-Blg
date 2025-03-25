@@ -38,7 +38,7 @@ app.use('/api/comments', commentRoutes);
 // ✅ Start the server
 sequelize.sync({ alter: true }).then(() => {
   console.log('✅ Database synced');
-  app.listen(5001, () => console.log('🚀 Server running on http://localhost:5001'));
+  app.listen(5002, () => console.log('🚀 Server running on http://localhost:5001'));
 }).catch(err => {
   console.error('❌ Database connection failed:', err);
 });

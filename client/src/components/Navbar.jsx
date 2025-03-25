@@ -24,7 +24,7 @@ export default function Navbar({ onSearch }) {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/" className="navbar-logo">📘 Academic Blog</Link>
+        <Link to="/" className="navbar-logo">📘 The Research Room</Link>
       </div>
 
       <form className="navbar-search" onSubmit={handleSearch}>
