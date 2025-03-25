@@ -166,3 +166,12 @@
   display: flex;
   gap: 1rem;
 }
+
+.like-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.like-button:hover {
+}
