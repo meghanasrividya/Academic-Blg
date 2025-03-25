@@ -36,6 +36,7 @@
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  font-family: 'open sans', sans-serif;
 }
 
 .post-card:hover {
@@ -63,7 +64,8 @@
   margin-top: 10px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
@@ -90,8 +92,7 @@
 }
 
 .page {
-  background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1600&q=80'
-  );
+  background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -105,9 +106,12 @@
 }
 
 .page::before {
-  content: "";
+  content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(255, 255, 255, 0.7); /* subtle white overlay */
   z-index: 0;
 }
@@ -116,7 +120,6 @@
   position: relative;
   z-index: 1;
 }
-
 
 .post-card {
   background: white;
@@ -138,7 +141,8 @@
   margin-top: 10px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
   border: none;
   padding: 6px 12px;
   border-radius: 15px;
