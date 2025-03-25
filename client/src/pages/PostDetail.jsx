@@ -1,7 +1,7 @@
-// src/pages/PostDetail.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import html2pdf from 'html2pdf.js';
 import './PostDetail.css';
 
 export default function PostDetail() {
@@ -10,6 +10,7 @@ export default function PostDetail() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const token = localStorage.getItem('token');
+  const postRef = useRef(); // for PDF export
 
   useEffect(() => {
     fetchPost();
@@ -55,14 +56,36 @@ export default function PostDetail() {
     }
   };
 
+  const handleDownloadPDF = () => {
+    const element = postRef.current;
+    html2pdf()
+      .set({
+        margin: 1,
+        filename: `${post.title}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      })
+      .from(element)
+      .save();
+  };
+
   if (!post) return <p>Loading post...</p>;
 
   return (
     <div className="post-detail-container">
-      <h2>{post.title}</h2>
-      <p className="post-author">By User {post.userId} | {new Date(post.createdAt).toLocaleDateString()}</p>
-      <div className="post-content">{post.content}</div>
-      <p className="views-count">👁️ {post.views} views</p>
+      <div ref={postRef} className="pdf-section">
+        <h2>{post.title}</h2>
+        <p className="post-author">
+          By User {post.userId} | {new Date(post.createdAt).toLocaleDateString()}
+        </p>
+        <div className="post-content">{post.content}</div>
+        <p className="views-count">👁️ {post.views} views</p>
+      </div>
+
+      <button onClick={handleDownloadPDF} className="download-btn">
+        📥 Download as PDF
+      </button>
 
       <div className="comments-section">
         <h3>📝 Comments</h3>
@@ -88,7 +111,9 @@ export default function PostDetail() {
             <button type="submit">Post Comment</button>
           </form>
         ) : (
-          <p><em>Login to add a comment</em></p>
+          <p>
+            <em>Login to add a comment</em>
+          </p>
         )}
       </div>
     </div>

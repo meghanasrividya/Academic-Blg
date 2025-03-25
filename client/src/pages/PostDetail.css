@@ -83,4 +83,17 @@
   .comment-form button:hover {
     background-color: #1e40af;
   }
+  .download-btn {
+    margin: 16px 0;
+    padding: 10px 20px;
+    background-color: #1d4ed8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .download-btn:hover {
+    background-color: #2563eb;
+  }
   
