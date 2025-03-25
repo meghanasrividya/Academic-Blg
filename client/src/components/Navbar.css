@@ -1,4 +1,11 @@
 /* Navbar.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
 .navbar {
   background: linear-gradient(to right, #2b5876, #4e4376);
   padding: 1rem 2rem;

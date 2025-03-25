@@ -58,38 +58,47 @@ export default function PostDetail() {
   if (!post) return <p>Loading post...</p>;
 
   return (
-    <div className="post-detail-container">
-      <h2>{post.title}</h2>
-      <p className="post-author">By User {post.userId} | {new Date(post.createdAt).toLocaleDateString()}</p>
-      <div className="post-content">{post.content}</div>
+    <>
+      <div className='page-wrapper'>
+        <div className='post-detail-container'>
+          <h2>{post.title}</h2>
+          <p className='post-author'>
+            By User {post.userId} |{' '}
+            {new Date(post.createdAt).toLocaleDateString()}
+          </p>
+          <div className='post-content'>{post.content}</div>
 
-      <div className="comments-section">
-        <h3>📝 Comments</h3>
-        {comments.length === 0 ? (
-          <p>No comments yet.</p>
-        ) : (
-          comments.map((comment) => (
-            <div key={comment.id} className="comment">
-              <small>{comment.User?.username || 'Anonymous'}</small>
-              <p>{comment.content}</p>
-            </div>
-          ))
-        )}
+          <div className='comments-section'>
+            <h3>📝 Comments</h3>
+            {comments.length === 0 ? (
+              <p>No comments yet.</p>
+            ) : (
+              comments.map((comment) => (
+                <div key={comment.id} className='comment'>
+                  <small>{comment.User?.username || 'Anonymous'}</small>
+                  <p>{comment.content}</p>
+                </div>
+              ))
+            )}
 
-        {token ? (
-          <form className="comment-form" onSubmit={handleSubmit}>
-            <textarea
-              placeholder="Write a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              required
-            />
-            <button type="submit">Post Comment</button>
-          </form>
-        ) : (
-          <p><em>Login to add a comment</em></p>
-        )}
+            {token ? (
+              <form className='comment-form' onSubmit={handleSubmit}>
+                <textarea
+                  placeholder='Write a comment...'
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  required
+                />
+                <button type='submit'>Post Comment</button>
+              </form>
+            ) : (
+              <p>
+                <em>Login to add a comment</em>
+              </p>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

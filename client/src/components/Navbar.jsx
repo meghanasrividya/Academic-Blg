@@ -1,6 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
 
 export default function Navbar({ onSearch }) {
@@ -25,7 +27,7 @@ export default function Navbar({ onSearch }) {
     <nav className='navbar'>
       <div className='navbar-left'>
         <Link to='/' className='navbar-logo'>
-          📘 The Research Room
+          <FontAwesomeIcon icon={faBookOpenReader} /> The Research Room
         </Link>
       </div>
 
