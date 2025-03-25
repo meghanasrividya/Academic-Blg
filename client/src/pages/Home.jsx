@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Pages.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home({ searchQuery = '' }) {
   const [posts, setPosts] = useState([]);
@@ -75,7 +76,11 @@ export default function Home({ searchQuery = '' }) {
               <button
                 onClick={() => handleDelete(post.id)}
                 className='delete-btn'>
-                🗑️ Delete
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  style={{ marginRight: '5px' }}
+                />{' '}
+                Delete
               </button>
               <button onClick={() => handleLike(post.id)}>
                 ❤️ {post.likes}

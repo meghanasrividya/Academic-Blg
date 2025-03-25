@@ -72,22 +72,10 @@
   cursor: pointer;
 }
 
-/* .edit-btn {
-  background-color: #ffc107;
-  color: #212529;
-}
-
-.edit-btn:hover {
-  background-color: #e0a800;
-} */
-
-.delete-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
 .delete-btn:hover {
   background-color: #c82333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .page {
@@ -146,6 +134,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .edit-btn {
@@ -164,6 +153,9 @@
 .delete-btn {
   background-color: #f44336;
   color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
 }
 .post-card:hover {
   transform: translateY(-2px);
