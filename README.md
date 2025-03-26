@@ -27,7 +27,7 @@ A full-stack, feature-rich **Academic Blog** built with **React**, **Node.js**, 
 - 🔒 Protected Routes (Private User Pages)
 - 📝 Create, Edit, Delete Blog Posts
 - 💬 Comment on Posts (with Author Info)
-- ❤️ Like & Unlike Posts (WIP)
+- ❤️ Like Posts 
 - 👤 User Profiles with Avatar Upload
 - 📤 Upload Avatar via Multer
 - 🔍 Real-Time Search Functionality
