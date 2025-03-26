@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async e => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
       await axios.post('/api/auth/register', { username, email, password });
@@ -21,14 +20,35 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-page">
-      <form className="auth-form" onSubmit={handleRegister}>
-        <h2>Register</h2>
-        <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} required />
-        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <>
+      <div className='page-wrapper'>
+        <div className='auth-page'>
+          <div className='form-container'>
+            <form className='auth-form' onSubmit={handleRegister}>
+              <h2>Register</h2>
+              <input
+                type='text'
+                placeholder='Username'
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type='email'
+                placeholder='Email'
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type='password'
+                placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button type='submit'>Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
