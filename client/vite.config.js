@@ -7,7 +7,6 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5005', // 👈 forward API requests to backend
       '/uploads': 'http://localhost:5005',
-
     }
   }
 });
