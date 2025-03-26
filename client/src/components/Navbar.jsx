@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import './Navbar.css';
 
+
 export default function Navbar({ onSearch }) {
   const { darkMode, toggleTheme } = useContext(ThemeContext);
   const [query, setQuery] = useState('');
@@ -24,7 +25,7 @@ export default function Navbar({ onSearch }) {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/" className="navbar-logo">📘 The Research Room</Link>
+        <Link to="/" className="navbar-logo">📖 The Researcher's Guru</Link>
       </div>
 
       <form className="navbar-search" onSubmit={handleSearch}>
