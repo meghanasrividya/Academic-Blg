@@ -12,16 +12,19 @@ export default function EditPost() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    api.get(`/posts/${id}`).then(res => {
-      setPost(res.data);
-      setTitle(res.data.title);
-      setContent(res.data.content);
-    }).catch(() => {
-      alert('Failed to load post');
-    });
+    api
+      .get(`/posts/${id}`)
+      .then((res) => {
+        setPost(res.data);
+        setTitle(res.data.title);
+        setContent(res.data.content);
+      })
+      .catch(() => {
+        alert('Failed to load post');
+      });
   }, [id]);
 
-  const handleUpdate = async e => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       await api.put(`/posts/${id}`, { title, content });
@@ -35,23 +38,29 @@ export default function EditPost() {
   if (!post) return <p>Loading post...</p>;
 
   return (
-    <div className="form-page">
-      <form onSubmit={handleUpdate} className="post-form">
-        <h2>✏️ Edit Post</h2>
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          rows="10"
-          value={content}
-          onChange={e => setContent(e.target.value)}
-          required
-        />
-        <button type="submit">✅ Update</button>
-      </form>
-    </div>
+    <>
+      <div className='page-wrapper'>
+        <div className='form-page'>
+          <div className='form-container'>
+            <form onSubmit={handleUpdate} className='post-form'>
+              <h2>✏️ Edit Post</h2>
+              <input
+                type='text'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+              <textarea
+                rows='10'
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
+              />
+              <button type='submit'>✅ Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

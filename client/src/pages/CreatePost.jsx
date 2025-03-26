@@ -20,9 +20,9 @@ export default function CreatePost() {
   };
 
   return (
-    <>
-      <div className='page-wrapper'>
-        <div className='form-page'>
+    <div className='page-wrapper'>
+      <div className='form-page'>
+        <div className='form-container'>
           <form onSubmit={handleCreate} className='post-form'>
             <h2>Create Post</h2>
             <input
@@ -43,6 +43,6 @@ export default function CreatePost() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
