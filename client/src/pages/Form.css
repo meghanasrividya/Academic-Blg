@@ -47,3 +47,15 @@
 .post-form button:hover {
   background: #218838;
 }
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
