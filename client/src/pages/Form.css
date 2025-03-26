@@ -1,13 +1,15 @@
 /* Form.css - shared styling for CreatePost & EditPost */
 
 .form-page {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   font-family: 'Open Sans', sans-serif;
+  text-align: center;
 }
 
 .post-form h2 {
@@ -17,14 +19,27 @@
 
 .post-form input,
 .post-form textarea {
-  width: 100%;
+  display: flex;
   padding: 12px;
   margin-bottom: 16px;
+  box-sizing: border-box;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
   outline: none;
   transition: border 0.3s ease;
+}
+
+.form-container {
+  width: 80vw;
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.post-form input {
+  width: 100%;
 }
 
 .post-form input:focus,
@@ -42,6 +57,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
+  width: 100%;
 }
 
 .post-form button:hover {
