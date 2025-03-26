@@ -71,9 +71,10 @@ export default function Home({ searchQuery = '' }) {
                 className='delete-btn'>
                 🗑️ Delete
               </button>
-              <button onClick={() => handleLike(post.id)}>
+              <button onClick={() => handleLike(post.id)} className='likes'>
                 ❤️ {post.likes}
               </button>
+              <br />
               <small>{post.views} views</small>
             </div>
           </div>

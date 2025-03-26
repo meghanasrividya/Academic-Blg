@@ -25,7 +25,7 @@ export default function Navbar({ onSearch }) {
     <nav className='navbar'>
       <div className='navbar-left'>
         <Link to='/' className='navbar-logo'>
-          📖 The Researcher's Guru{' '}
+          📖 The Researcher's Guru
         </Link>
       </div>
 

@@ -57,6 +57,7 @@
   display: block;
   margin: 8px 0;
   color: #888;
+  padding-top: 10px;
 }
 
 .actions {
@@ -68,24 +69,25 @@
 .edit-btn,
 .delete-btn {
   padding: 6px 12px;
-  border: none;
+  border: 1px solid #000;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
 }
 
 .edit-btn {
-  background-color: #ffc107;
+  background-color: #fff;
   color: #212529;
 }
 
 .edit-btn:hover {
-  background-color: #e0a800;
+  background-color: #00e05a;
 }
 
 .delete-btn {
   background-color: #dc3545;
-  color: white;
+  color: #fff;
+  font-size: 16px;
 }
 
 .delete-btn:hover {
@@ -151,13 +153,17 @@
 }
 
 .edit-btn {
-  background-color: #4caf50;
-  color: white;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 .delete-btn {
-  background-color: #f44336;
-  color: white;
+  background-color: #e68680;
+  color: #000;
 }
 .post-card:hover {
   transform: translateY(-2px);
@@ -167,4 +173,10 @@
   margin-top: 1rem;
   display: flex;
   gap: 1rem;
+}
+
+.likes {
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
