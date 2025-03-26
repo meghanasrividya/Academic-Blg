@@ -4,7 +4,7 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .header {
@@ -98,7 +98,7 @@
   min-height: 100vh;
   min-width: 100vh;
   padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   backdrop-filter: blur(2px);
   background-attachment: fixed;
   position: relative;
