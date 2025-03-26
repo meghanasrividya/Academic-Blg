@@ -1,99 +1,99 @@
 .post-detail-container {
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background: var(--card-bg, #fff);
-    border-radius: 1.5rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    color: var(--text-color, #222);
-    transition: background 0.3s, color 0.3s;
-  }
-  
-  .post-detail-container h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: var(--accent-color, #1e40af);
-  }
-  
-  .post-author {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-  }
-  
-  .post-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    white-space: pre-line;
-  }
-  
-  .comments-section {
-    margin-top: 3rem;
-  }
-  
-  .comments-section h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-  
-  .comment {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: #f9fafb;
-    border-left: 4px solid #3b82f6;
-    border-radius: 8px;
-  }
-  
-  .comment small {
-    display: block;
-    color: #666;
-    margin-bottom: 0.4rem;
-  }
-  
-  .comment-form {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .comment-form textarea {
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    resize: vertical;
-    font-size: 1rem;
-    min-height: 100px;
-    margin-bottom: 1rem;
-    font-family: inherit;
-  }
-  
-  .comment-form button {
-    align-self: flex-start;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  
-  .comment-form button:hover {
-    background-color: #1e40af;
-  }
-  .download-btn {
-    margin: 16px 0;
-    padding: 10px 20px;
-    background-color: #1d4ed8;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .download-btn:hover {
-    background-color: #2563eb;
-  }
-  
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--card-bg, #fff);
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: var(--text-color, #222);
+  transition: background 0.3s, color 0.3s;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.post-detail-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color, #1e40af);
+}
+
+.post-author {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  white-space: pre-line;
+}
+
+.comments-section {
+  margin-top: 3rem;
+}
+
+.comments-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.comment {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9fafb;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+}
+
+.comment small {
+  display: block;
+  color: #666;
+  margin-bottom: 0.4rem;
+}
+
+.comment-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form textarea {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 1rem;
+  min-height: 100px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.comment-form button {
+  align-self: flex-start;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.comment-form button:hover {
+  background-color: #1e40af;
+}
+.download-btn {
+  margin: 16px 0;
+  padding: 10px 20px;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background-color: #2563eb;
+}

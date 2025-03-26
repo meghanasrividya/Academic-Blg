@@ -25,25 +25,32 @@ export default function Login() {
   };
 
   return (
-    <div className="form-page">
-      <form onSubmit={handleLogin} className="post-form">
-        <h2>🔐 Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <>
+      <div className='page-wrapper'>
+        <div className='form-page'>
+          <div className='form-container'>
+            <form onSubmit={handleLogin} className='post-form'>
+              <h2>🔐 Login</h2>
+              <input
+                type='email'
+                placeholder='Email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type='password'
+                placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              
+              <button type='submit'>Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

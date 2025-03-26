@@ -5,9 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:5002', // 👈 forward API requests to backend
-      '/uploads': 'http://localhost:5002',
-
+      '/api': 'http://localhost:5005', // 👈 forward API requests to backend
+      '/uploads': 'http://localhost:5005',
     }
   }
 });
