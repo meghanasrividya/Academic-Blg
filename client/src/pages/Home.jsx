@@ -74,8 +74,9 @@ export default function Home({ searchQuery = '' }) {
               <button onClick={() => handleLike(post.id)} className='likes'>
                 ❤️ {post.likes}
               </button>
-              <br />
-              <small>{post.views} views</small>
+              <div className='views-container'>
+                <small>{post.views} views</small>
+              </div>
             </div>
           </div>
         ))

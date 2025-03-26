@@ -57,8 +57,13 @@
   display: block;
   margin: 8px 0;
   color: #888;
-  padding-top: 6px;
+  padding-top: 10px;
 }
+
+/* .views-container {
+  display: flex;
+  flex-direction: column;
+} */
 
 .actions {
   display: flex;
