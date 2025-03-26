@@ -17,7 +17,7 @@ A full-stack, feature-rich **Academic Blog** built with **React**, **Node.js**, 
 |------------------------|----------------------------|----------|
 | React + Vite           | Node.js + Express.js       | MySQL    |
 | React Router + Axios   | Sequelize ORM              | Sequelize CLI |
-| Tailwind CSS / Custom  | JWT Authentication         |          |
+|  Custom CSS  | JWT Authentication         |          |
 
 ---
 
