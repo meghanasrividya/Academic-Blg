@@ -40,7 +40,7 @@ sequelize
   .sync({ alter: true })
   .then(() => {
     console.log('✅ Database synced');
-    app.listen(5005, () =>
+    app.listen(10000, () =>
       console.log('🚀 Server running on http://localhost:5005')
     );
   })
