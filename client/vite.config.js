@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:5005', // 👈 forward API requests to backend
-      '/uploads': 'http://localhost:5005',
+      '/api': 'https://academic-blg-2.onrender.com', // 👈 forward API requests to backend
+      '/uploads': 'https://academic-blg-2.onrender.com',
     }
   }
 });
