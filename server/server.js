@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
-
+const port = process.env.PORT || 5000;
 // ✅ Middleware
 app.use(express.json());
 app.use(cors());
@@ -40,8 +40,8 @@ sequelize
   .sync({ alter: true })
   .then(() => {
     console.log('✅ Database synced');
-    app.listen(10000, () =>
-      console.log('🚀 Server running on http://localhost:5005')
+    app.listen(port, () =>
+      console.log('🚀 Server running on http://localhost ${port}')
     );
   })
   .catch((err) => {
